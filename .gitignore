@@ -1,0 +1,31 @@
+# Ignorar los entornos virtuales
+venv/
+env/
+
+# Archivos compilados de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Archivos de migración (si no quieres incluirlos)
+lsp/migrations/
+taskapi/migrations/
+
+# Archivos de configuración local o sensibles
+*.env
+local_settings.py
+
+# Archivos de logs
+*.log
+
+# Archivos de configuración del IDE
+.vscode/
+.idea/
+
+# Ignorar bases de datos locales
+*.sqlite3
+*.db
+
+# Archivos estáticos generados automáticamente (si usas staticfiles)
+staticfiles/
