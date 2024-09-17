@@ -6,16 +6,22 @@ import mediapipe as mp
 from tensorflow.keras.models import load_model
 import tempfile
 import os
-import pygame
+
+# Verificar si estamos en un entorno que soporta audio
+audio_enabled = not os.environ.get('RENDER') and not os.environ.get('DISABLE_AUDIO')
+
+# Si el entorno soporta audio, inicializamos Pygame
+if audio_enabled:
+    import pygame
+    pygame.mixer.init()
+else:
+    print("Entorno sin acceso a audio, Pygame no se inicializa.")
 
 # Cargar el modelo entrenado
 model = load_model('lsp/media/resultados/action_recognition_model.h5')
 
 # Inicializar Mediapipe
 mp_holistic = mp.solutions.holistic
-
-# Inicializar pygame para reproducir sonidos
-pygame.mixer.init()
 
 # Diccionario que asocia cada acción con su archivo de audio
 audio_files = {
@@ -85,9 +91,10 @@ def recognize_actions_from_video(request):
                         if action != action_played:  # Solo reproducir si la acción es diferente
                             audio_file = audio_files.get(action, None)
                             if audio_file and os.path.exists(audio_file):
-                                print(f"Reproduciendo audio: {audio_file}")
-                                pygame.mixer.music.load(audio_file)
-                                pygame.mixer.music.play()
+                                if audio_enabled:
+                                    print(f"Reproduciendo audio: {audio_file}")
+                                    pygame.mixer.music.load(audio_file)
+                                    pygame.mixer.music.play()
                                 action_played = action  # Actualizar la acción reproducida
                                 response = {'action': action}
                                 action_detected = True  # Indicar que se detectó una acción
