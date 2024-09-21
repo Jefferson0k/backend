@@ -145,4 +145,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
     "https://zoom-clone-97lf.onrender.com",
+    "http://localhost:3000",
 ]

@@ -13,7 +13,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Cargar el modelo entrenado
-model = load_model('lsp/media/resultados/action_recognition_model.h5')
+model = load_model('lsp/media/resultados/simulacion.h5')
 
 # Inicializar Mediapipe
 mp_holistic = mp.solutions.holistic
@@ -69,7 +69,7 @@ def recognize_actions_from_video(request):
                     prediction = model.predict(sequence)
                     prediction_prob = np.max(prediction)
                     
-                    actions = ['hola', 'gracias', 'adios']
+                    actions = ['adios','bien','camiseta','diez','doce','gato','gracias','Hola','pantalones','rosado','trabajar','verde','zapatos']
                     
                     logger.info(f"Predicción raw: {prediction}")
                     logger.info(f"Probabilidad máxima: {prediction_prob}")
